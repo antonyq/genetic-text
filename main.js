@@ -9,7 +9,7 @@ const randChar = (word) => ALPHABET[randInt(0, ALPHABET.length)];
 window.onload = () => {
     let word = prompt('Word:', 'space in lowercase');
     let population = randWords(START_POPULATION_COUNT, word.length);
-    generateWord(randWords, word);
+    evolution(randWords, word);
 }
 
 function randWord(symbolsCount) {
@@ -73,5 +73,5 @@ function crossover (word1, word2) {
     return childWord;
 }
 
-const mutation (word) => word.splice(randInt(0, word.length), 1, randChar());
+const mutation = (word) => word.splice(randInt(0, word.length), 1, randChar());
 // EVOLUTION END //
