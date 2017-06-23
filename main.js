@@ -4,7 +4,7 @@ const GENRATIONS_LIMIT = 100;
 const ALPHABET = 'abcdefghijklmnopqrstuvwxyz ';
 
 const randInt = (min, max) => min + Math.ceil(Math.random() * (max - min));
-const randChar = (word) => ALPHABET[randInt(0, ALPHABET.length)];
+const randChar = (word) => ALPHABET[randInt(0, ALPHABET.length - 1)];
 
 window.onload = () => {
     let word = prompt('Word:', 'space in lowercase');
@@ -28,19 +28,15 @@ function randWords (count, symbolsCount) {
     return randWords;
 }
 
-function hasTargetWord(population, targetWord) {
-    for (let i = 0; i < population.length; i++) {
-        if (!fitness(population, targetWord)) return true;
-    }
-    return false;
-}
-
 // EVOLUTION //
 function evolution (population, targetWord) {
-    if (!hasTargetWord(population, targetWord)) {
+    let offsprings = [],
+        weakest = [],
+        fittest = [];
+    if (!population.includes(targetWord)) {
         console.log(targetWord);
     } else {
-        while (!hasTargetWord(population, targetWord)) {
+        while (!population.inludes(targetWord)) {
 
         }
     }
@@ -52,6 +48,18 @@ function fitness (word, targetWord) { // -> max
         value += (word[i] == targetWord[i]) ? 1 : 0;
     }
     return value;
+}
+
+function fittest (population, fraction, targetWord) {
+    let compare = (a, b) => {
+        if (fitness(a, targetWord) < fitness(b, targetWord))
+            return -1;
+        if (fitness(a, targetWord) > fitness(b, targetWord))
+            return 1;
+        return 0;
+    }
+
+    population = population.sort(comapare);
 }
 
 function selection (word1, word2, targetWord) {
