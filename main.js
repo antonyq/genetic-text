@@ -30,11 +30,8 @@ function evolution (population, targetWord) {
 }
 
 function fitness (word, targetWord) {
-    let value = 0;
-    for (let i = 0; i < word.length; i++) {
-        value += (word[i] == targetWord[i]) ? 1 : 0;
-    }
-    return value;
+    let values = word.split('').map((char, index) => (char == targetWord[index]) ? 1 : 0);
+    return values.reduce((a, b) => a + b);
 }
 
 function selection (population, targetWord) {
