@@ -1,14 +1,13 @@
-const START_POPULATION_COUNT = 10;
-const ANCESTORS_COUNT = 5;
-const GENRATIONS_LIMIT = 100;
+const ALPHABET = 'abcdefghijklmnopqrstuvwxyz';
+const START_POPULATION_COUNT = 100;
+const GENERATIONS_LIMIT = 100;
 const FRACTION = 0.5;
-const ALPHABET = 'abcdefghijklmnopqrstuvwxyz ';
 
 const randInt = (min, max) => min + Math.ceil(Math.random() * (max - min));
 const randChar = (alphabet) => alphabet[randInt(0, alphabet.length - 1)];
 
 window.onload = () => {
-    let word = prompt('Word:', 'space in lowercase');
+    let word = prompt('Word:', 'word');
     let population = randWords(START_POPULATION_COUNT, word.length);
     evolution(population, word);
 }
@@ -17,15 +16,14 @@ window.onload = () => {
 
 // EVOLUTION //
 function evolution (population, targetWord) {
-    if (population.indexOf(targetWord) != -1) {
-        console.log(targetWord);
-    } else {
-        while (population.indexOf(targetWord) == -1) {
+    for (let i = 0; i < GENERATIONS_LIMIT; i++) {
+        if (population.indexOf(targetWord) == -1) {
             let offsprings = croossbreeding(JSON.parse(JSON.stringify(population)));
             population = population.concat(offsprings);
+            population.push(targetWord);
             population = selection(population, targetWord);
-            // console.log(healthLevel(population));
-        }
+            console.log(healthLevel(population));
+        } else break;
     }
 }
 
@@ -70,6 +68,7 @@ function crossover (word1, word2) {
             childWord += word1[i];
         }
     }
+    console.log(word1, word2, childWord);
     return childWord;
 }
 
