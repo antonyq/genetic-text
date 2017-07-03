@@ -1,7 +1,7 @@
 const ALPHABET = 'abcdefghijklmnopqrstuvwxyz';
 const START_POPULATION_COUNT = 100;
 const GENERATIONS_LIMIT = 100;
-const FRACTION = 0.5;
+const FRACTION = 0.7;
 
 const randInt = (min, max) => min + Math.ceil(Math.random() * (max - min));
 const randChar = (alphabet) => alphabet[randInt(0, alphabet.length - 1)];
